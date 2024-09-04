@@ -52,7 +52,6 @@ android {
     }
 }
 
-
 dependencies {
 
     implementation(libs.androidx.core.ktx)
@@ -67,6 +66,7 @@ dependencies {
     ksp(libs.hilt.compiler)
     implementation(libs.graphQl)
     implementation(libs.navigation.compose)
+    implementation(libs.coil)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
