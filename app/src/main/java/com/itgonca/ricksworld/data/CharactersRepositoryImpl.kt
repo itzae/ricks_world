@@ -24,7 +24,7 @@ class CharactersRepositoryImpl @Inject constructor(private val apolloClient: Apo
         } ?: emptyList()
 
         emit(character)
-    }
+  }
 
     override fun getCharacterDetail(idCharacter: String): Flow<Character> = flow {
         val result = apolloClient.query(GetCharacterDetailQuery(idCharacter)).execute().dataOrThrow()

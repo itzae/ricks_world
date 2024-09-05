@@ -75,6 +75,7 @@ dependencies {
     implementation(libs.androidx.constraintlayout.compose)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.hilt.android)
+    testImplementation("junit:junit:4.12")
     ksp(libs.hilt.compiler)
     implementation(libs.navigation.compose)
     implementation(libs.hilt.navigation)
