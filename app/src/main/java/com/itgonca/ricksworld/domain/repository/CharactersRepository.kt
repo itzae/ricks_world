@@ -7,4 +7,5 @@ import kotlinx.coroutines.flow.Flow
 interface CharactersRepository {
     fun getAllCharacters(): Flow<List<Character>>
     fun getCharacterDetail(idCharacter: String): Flow<Character>
+    fun getCharacterByName(name: String): Flow<List<Character>>
 }

@@ -5,7 +5,8 @@ import com.itgonca.ricksworld.domain.model.Character
 
 data class CharacterState(
     val characters: List<CharacterUiState> = emptyList(),
-    val isError: Boolean = false
+    val isError: Boolean = false,
+    val query:String=""
 )
 
 data class CharacterUiState(

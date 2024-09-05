@@ -13,7 +13,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.itgonca.ricksworld.R
 import com.itgonca.ricksworld.ui.theme.RicksWorldTheme
 import com.itgonca.ricksworld.ui.theme.Typography
@@ -36,7 +35,7 @@ fun ScreenStateTemplate(
             )
             Text(text = state.message, style = Typography.titleMedium)
             if (state == ScreenState.ERROR)
-                Button(modifier = Modifier.padding(16.dp), onClick = { onErrorAction() }) {
+                Button(modifier = Modifier.padding(RicksWorldTheme.dimens.space16), onClick = { onErrorAction() }) {
                     Text(text = "Regresar")
                 }
         }

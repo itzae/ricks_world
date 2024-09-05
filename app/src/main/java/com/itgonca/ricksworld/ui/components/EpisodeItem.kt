@@ -8,17 +8,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.itgonca.ricksworld.ui.theme.RicksWorldTheme
 import com.itgonca.ricksworld.ui.theme.Typography
 
 @Composable
 fun EpisodeItem(modifier: Modifier = Modifier, title: String, subtitle: String) {
     Card(modifier = modifier.fillMaxWidth()) {
-        Column(modifier = Modifier.padding(16.dp)) {
+        Column(modifier = Modifier.padding(RicksWorldTheme.dimens.space16)) {
             Text(text = title, style = Typography.titleMedium)
             Text(
-                modifier = Modifier.padding(top = 8.dp),
+                modifier = Modifier.padding(top = RicksWorldTheme.dimens.space8),
                 text = subtitle,
                 style = Typography.labelLarge
             )

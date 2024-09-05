@@ -1,0 +1,16 @@
+query GetCharacterByName($nameCharacter: String!){
+    characters(page:1,filter:{name: $nameCharacter}) {
+        info {
+            count
+            pages
+            next
+            prev
+        }
+        results {
+            id
+            name
+            image
+            species
+        }
+    }
+}
