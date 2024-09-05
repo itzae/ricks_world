@@ -1,6 +1,7 @@
 package com.itgonca.ricksworld.ui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -24,9 +25,12 @@ import com.itgonca.ricksworld.ui.theme.RicksWorldTheme
 @Composable
 fun CharacterItem(
     modifier: Modifier = Modifier,
-    characterUiState: CharacterUiState = CharacterUiState()
+    characterUiState: CharacterUiState = CharacterUiState(),
+    onItemSelect: (String) -> Unit = {}
 ) {
-    Box(modifier = modifier.size(100.dp)) {
+    Box(modifier = modifier
+        .size(100.dp)
+        .clickable { onItemSelect(characterUiState.id) }) {
         AsyncImage(
             modifier = Modifier.fillMaxSize(),
             model = characterUiState.image,
