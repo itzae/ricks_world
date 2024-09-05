@@ -26,7 +26,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -56,7 +55,7 @@ fun CharacterDetailScreenRoute(
     onBack: () -> Unit = {}
 ) {
     val stateDetail: CharacterDetailState by detailViewModel.characterDetailInfo.collectAsStateWithLifecycle()
-    val context = LocalContext.current
+
     LaunchedEffect(key1 = idCharacter) {
         detailViewModel.fetchDetailCharacter(idCharacter)
     }
@@ -134,10 +133,10 @@ private fun BannerDetail(modifier: Modifier = Modifier, onBack: () -> Unit = {})
             .height(150.dp)
             .background(
                 color = MaterialTheme.colorScheme.primary,
-                RoundedCornerShape(bottomStart = 24.dp, bottomEnd = 24.dp)
+                RoundedCornerShape(bottomStart = RicksWorldTheme.dimens.space24, bottomEnd = RicksWorldTheme.dimens.space24)
             )
     ) {
-        IconButton(onClick = onBack, modifier = Modifier.padding(top = 16.dp)) {
+        IconButton(onClick = onBack, modifier = Modifier.padding(top = RicksWorldTheme.dimens.space16)) {
             Icon(
                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                 contentDescription = "",
@@ -176,7 +175,7 @@ private fun CharacterData(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .padding(top = 24.dp),
+            .padding(top = RicksWorldTheme.dimens.space24),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(text = state.name, style = Typography.headlineLarge, fontWeight = FontWeight.Bold)
@@ -184,8 +183,7 @@ private fun CharacterData(
             DotStatus(statusCharacter = state.status)
             Text(
                 modifier = Modifier
-                    .padding(8.dp)
-                    .loading(isLoading),
+                    .padding(RicksWorldTheme.dimens.space16),
                 text = "${state.status.label} - ${state.specie}",
                 style = Typography.titleSmall
             )
@@ -193,30 +191,30 @@ private fun CharacterData(
         Text(
             modifier = Modifier
                 .align(Alignment.Start)
-                .padding(16.dp)
-                .loading(isLoading),
+                .padding(RicksWorldTheme.dimens.space16),
             text = "Comes from: ${state.origin}",
             style = Typography.labelMedium
         )
         Text(
             modifier = Modifier
                 .align(Alignment.Start)
-                .padding(start = 16.dp)
-                .loading(isLoading),
+                .padding(start = RicksWorldTheme.dimens.space16),
             text = "Last known location: ${state.location}",
             style = Typography.labelMedium
         )
         Text(
             modifier = Modifier
-                .padding(8.dp)
-                .loading(isLoading),
+                .padding(RicksWorldTheme.dimens.space8),
             text = "Episodes",
             style = Typography.titleSmall
         )
         LazyColumn(modifier = Modifier.loading(isLoading)) {
             items(state.episodes) {
                 EpisodeItem(
-                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                    modifier = Modifier.padding(
+                        horizontal = RicksWorldTheme.dimens.space16,
+                        vertical = RicksWorldTheme.dimens.space8
+                    ),
                     title = it.number,
                     subtitle = it.name
                 )
