@@ -52,8 +52,18 @@ android {
     }
 }
 
-dependencies {
+apollo {
+    service("service") {
+        packageName.set("com.itgonca.ricksworld")
+        introspection {
+            endpointUrl.set("https://rickandmortyapi.com/graphql")
+            schemaFile.set(file("src/main/graphql/schema.graphqls"))
+        }
+    }
+}
 
+
+dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -64,9 +74,9 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
-    implementation(libs.graphQl)
     implementation(libs.navigation.compose)
     implementation(libs.coil)
+    implementation(libs.graphQl)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

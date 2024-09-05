@@ -1,0 +1,13 @@
+query GetAllUsers{
+    characters(page:1) {
+        info {
+            count
+        }
+        results {
+            id
+            name
+            image
+            species
+        }
+    }
+}
