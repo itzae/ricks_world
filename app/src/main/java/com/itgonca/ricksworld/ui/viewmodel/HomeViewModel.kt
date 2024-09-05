@@ -6,26 +6,24 @@ import com.itgonca.ricksworld.domain.repository.CharactersRepository
 import com.itgonca.ricksworld.ui.state.CharacterState
 import com.itgonca.ricksworld.ui.state.toCharacterUi
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val charactersRepository: CharactersRepository) :
     ViewModel() {
-    private val _characterState = MutableStateFlow(CharacterState())
-    val characterState: StateFlow<CharacterState>
-        get() = _characterState.asStateFlow()
+    val characterListState: StateFlow<CharacterState> =
+        charactersRepository.getAllCharacters().map { characterResponse ->
+            CharacterState(characters = characterResponse.map { it.toCharacterUi() })
+        }.catch {
 
-    fun fetchAllCharacters() {
-        charactersRepository.getAllCharacters().onEach { characterDomain ->
-            _characterState.update {
-                it.copy(characters = characterDomain.map { character -> character.toCharacterUi() })
-            }
-        }.launchIn(viewModelScope)
-    }
+        }.stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = CharacterState()
+        )
 }
