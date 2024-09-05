@@ -20,7 +20,7 @@ class HomeViewModel @Inject constructor(private val charactersRepository: Charac
         charactersRepository.getAllCharacters().map { characterResponse ->
             CharacterState(characters = characterResponse.map { it.toCharacterUi() })
         }.catch {
-
+            CharacterState(isError = true)
         }.stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5_000),

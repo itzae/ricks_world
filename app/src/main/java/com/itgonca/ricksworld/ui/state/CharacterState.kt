@@ -3,7 +3,10 @@ package com.itgonca.ricksworld.ui.state
 import com.itgonca.ricksworld.domain.model.Character
 
 
-data class CharacterState(val characters: List<CharacterUiState> = emptyList())
+data class CharacterState(
+    val characters: List<CharacterUiState> = emptyList(),
+    val isError: Boolean = false
+)
 
 data class CharacterUiState(
     val id: String = "",
